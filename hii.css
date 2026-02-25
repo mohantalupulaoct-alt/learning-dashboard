@@ -1,0 +1,154 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body Background */
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg, #6ec6ff, #81c784, #ffb74d);
+    background-size: 200% 200%;
+    animation: gradientMove 8s ease infinite;
+}
+
+/* Container */
+.container {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Card Base */
+.card {
+    width: 280px;
+    height: 220px;
+    text-decoration: none;
+    color: #333;
+    background: white;
+    border-radius: 25px;
+    padding: 30px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 1s ease forwards;
+}
+
+/* Icons */
+.icon {
+    font-size: 40px;
+    margin-bottom: 15px;
+}
+
+/* Titles */
+.card h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* Description */
+.card p {
+    font-size: 15px;
+    opacity: 0.7;
+}
+
+/* Hover Effects */
+.card:hover {
+    transform: scale(1.07);
+    box-shadow: 0 20px 45px rgba(0,0,0,0.2);
+}
+
+/* Specific Accent Colors */
+.practice {
+    border-top: 6px solid #42a5f5;
+}
+
+.learn {
+    border-top: 6px solid #66bb6a;
+}
+
+/* Entrance Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Background Animation */
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .card {
+        width: 90%;
+        height: 200px;
+    }
+}/* Heading Style */
+.main-heading {
+    width: 100%;
+    text-align: center;
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 40px;
+    letter-spacing: 2px;
+    color: white;
+    text-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+    animation: slideDown 0.8s ease forwards;
+}
+
+/* Smooth entrance animation */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Smooth page brightness effect */
+body {
+    transition: filter 0.4s ease;
+}
+
+/* When mouse enters page */
+body:hover {
+    filter: brightness(0.95);
+}
+.container:hover .card {
+    opacity: 1.6;
+    transition: 0.3s ease;
+}
+
+/* Highlight hovered card */
+.card:hover {
+    opacity: 1 !important;
+    transform: scale(5.07);
+}
