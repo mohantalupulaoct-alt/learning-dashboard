@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Deadline Task Manager</title>
+
+<style>
+
+/* ===== BLACK + RED THEME ===== */
+body {
+    background-color: #000;
+    color: #ff2b2b;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+.container {
+    width: 90%;
+    max-width: 600px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+}
+
+.input-area {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+input, button {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ff2b2b;
+    background: #111;
+    color: #ff2b2b;
+}
+
+button {
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background: #ff2b2b;
+    color: black;
+}
+
+.task {
+    background: #111;
+    padding: 15px;
+    margin-bottom: 12px;
+    border-left: 4px solid #ff2b2b;
+    border-radius: 6px;
+}
+
+.task small {
+    display: block;
+    margin-top: 6px;
+    font-size: 13px;
+}
+
+.actions {
+    margin-top: 10px;
+}
+
+.actions button {
+    margin-right: 10px;
+    font-size: 12px;
+}
+
+.submitted {
+    color: #00ff88;
+    border-left: 4px solid #00ff88;
+}
+
+.overdue {
+    color: #ff0000;
+    border-left: 4px solid #ff0000;
+}
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>DEADLINE MANAGER</h1>
+
+    <div class="input-area">
+        <input type="text" id="taskInput" placeholder="Enter Task">
+        <input type="date" id="deadlineInput">
+        <button onclick="addTask()">Add Task</button>
+    </div>
+
+    <div id="taskList"></div>
+</div>
+
+<script>
+
+function addTask() {
+    const taskText = document.getElementById("taskInput").value.trim();
+    const deadline = document.getElementById("deadlineInput").value;
+
+    if (taskText === "" || deadline === "") {
+        alert("Please enter task and deadline");
+        return;
+    }
+
+    const taskDiv = document.createElement("div");
+    taskDiv.classList.add("task");
+
+    const today = new Date().toISOString().split("T")[0];
+
+    let statusText = "Pending";
+
+    if (deadline < today) {
+        statusText = "Unsubmitted (Deadline Passed)";
+        taskDiv.classList.add("overdue");
+    }
+
+    taskDiv.innerHTML = `
+        <strong>${taskText}</strong>
+        <small>Deadline: ${deadline}</small>
+        <small>Status: <span class="status">${statusText}</span></small>
+        <div class="actions">
+            <button onclick="markSubmitted(this)">Mark Submitted</button>
+            <button onclick="deleteTask(this)">Delete</button>
+        </div>
+    `;
+
+    document.getElementById("taskList").appendChild(taskDiv);
+
+    document.getElementById("taskInput").value = "";
+    document.getElementById("deadlineInput").value = "";
+}
+
+function deleteTask(button) {
+    button.parentElement.parentElement.remove();
+}
+
+function markSubmitted(button) {
+    const taskDiv = button.parentElement.parentElement;
+    taskDiv.classList.remove("overdue");
+    taskDiv.classList.add("submitted");
+    taskDiv.querySelector(".status").innerText = "Submitted";
+}
+
+</script>
+
+</body>
+</html>
